@@ -166,9 +166,9 @@
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnRemove" alignment="1" min="-2" pref="39" max="-2" attributes="0"/>
-                      <Component id="btnAdd" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="btnAdd" min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">

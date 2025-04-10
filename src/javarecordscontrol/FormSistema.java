@@ -20,10 +20,12 @@ public class FormSistema extends javax.swing.JFrame {
         initComponents();
     }
 
-    void mostrarPilha(Pilha<Recorde> p, JTextArea meuList){        
+    void mostrarPilha(Pilha<Recorde> pilha, JTextArea meuList){        
         meuList.setText("");
-        meuList.append(p.toString());
-            
+        //meuList.append(p.toString());
+        for(Recorde r: pilha){
+            meuList.append(r.getNome() +":"+ r.getTempo() +"\n");
+        }   
     }
     void mostrarPilhaDesimpilhada(Pilha<Recorde> p, JTextArea listAux){        
         listAux.setText("");
@@ -199,8 +201,8 @@ public class FormSistema extends javax.swing.JFrame {
                         .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRemove, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,11 +285,14 @@ public class FormSistema extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int i = 0;
         while (i != 1) {
-            if (!minhaPilha.isEmpty() && !minhaPilhaDesimpilhada.isEmpty()) {
+            if (!minhaPilha.isEmpty()) {
                 minhaPilha.pop();
+            }
+            else if(!minhaPilhaDesimpilhada.isEmpty()){
                 minhaPilhaDesimpilhada.pop();
-            } else {
-                i = 1;  // Sai do loop quando uma das pilhas estiver vazia
+            }
+            else {
+                i = 1;
             }
         }
         mostrarPilha(minhaPilha, listPilha);
