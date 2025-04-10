@@ -48,6 +48,7 @@ public class FormSistema extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtTempo = new javax.swing.JTextField();
         txtData = new javax.swing.JFormattedTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -127,6 +128,13 @@ public class FormSistema extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        jButton1.setText("Limpar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -135,7 +143,9 @@ public class FormSistema extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(51, 51, 51)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(64, 64, 64)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,7 +154,7 @@ public class FormSistema extends javax.swing.JFrame {
                                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(45, 45, 45)
                                 .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTempo, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -178,9 +188,13 @@ public class FormSistema extends javax.swing.JFrame {
                     .addComponent(btnRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -206,32 +220,6 @@ public class FormSistema extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-       
-       if(txtTempo.getText() != "" || txtNome.getText() != "" || txtData.getText() != ""){
-            JOptionPane.showMessageDialog(this, "Há campos vazios, preencha-os antes de adicionar um recorde", "Erro", JOptionPane.ERROR_MESSAGE);
-       }
-       else{ 
-            Recorde novoRecorde = new Recorde();
-            novoRecorde.setNome(txtNome.getText());
-            novoRecorde.setTempo(Double.parseDouble(txtTempo.getText()));
-            String dataStr = txtData.getText();
-            LocalDate dataFormatada = LocalDate.parse(dataStr,DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            novoRecorde.setDataRecorde(dataFormatada);
-
-             if(!minhaPilha.isEmpty()){
-                 if(novoRecorde.getTempo() < minhaPilha.peek().getTempo()){
-                     minhaPilha.push(novoRecorde);
-                     mostrarPilha(minhaPilha, listPilha);
-                 }
-                 }
-             else{
-                 minhaPilha.push(novoRecorde);
-                 mostrarPilha(minhaPilha, listPilha);
-             }
-       }
-    }//GEN-LAST:event_btnAddActionPerformed
-
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         
         if (!minhaPilha.isEmpty()) {
@@ -251,6 +239,46 @@ public class FormSistema extends javax.swing.JFrame {
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+
+        if(txtTempo.getText().equals("") || txtNome.getText().equals("") || txtData.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Há campos vazios, preencha-os antes de adicionar um recorde", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            Recorde novoRecorde = new Recorde();
+            novoRecorde.setNome(txtNome.getText());
+            novoRecorde.setTempo(Double.parseDouble(txtTempo.getText()));
+            String dataStr = txtData.getText();
+            LocalDate dataFormatada = LocalDate.parse(dataStr,DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            novoRecorde.setDataRecorde(dataFormatada);
+
+            if(!minhaPilha.isEmpty()){
+                if(novoRecorde.getTempo() < minhaPilha.peek().getTempo()){
+                    minhaPilha.push(novoRecorde);
+                    mostrarPilha(minhaPilha, listPilha);
+                }
+            }
+            else{
+                minhaPilha.push(novoRecorde);
+                mostrarPilha(minhaPilha, listPilha);
+            }
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int i = 0;
+        while (i != 1) {
+            if (!minhaPilha.isEmpty() && !minhaPilhaDesimpilhada.isEmpty()) {
+                minhaPilha.pop();
+                minhaPilhaDesimpilhada.pop();
+            } else {
+                i = 1;  // Sai do loop quando uma das pilhas estiver vazia
+            }
+        }
+        mostrarPilha(minhaPilha, listPilha);
+        mostrarPilhaDesimpilhada(minhaPilhaDesimpilhada, listAux);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -290,6 +318,7 @@ public class FormSistema extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnRemove;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;

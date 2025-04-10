@@ -55,8 +55,9 @@ public class Pilha<T> {
             
         }
         this.elementos = elementosNovos;
+        }
     }
-}
+    
     @Override
     public String toString(){
         
