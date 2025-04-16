@@ -24,7 +24,7 @@ public class FormSistema extends javax.swing.JFrame {
         meuList.setText("");
         //meuList.append(p.toString());
         for(Recorde r: pilha){
-            meuList.append(r.getNome() +":"+ r.getTempo() +"\n");
+            meuList.append("Nome: " + r.getNome() + " Data: "+ r.getDataRecorde() +" Tempo: "+ r.getTempo() +"\n");
         }   
     }
     void mostrarPilhaDesimpilhada(Pilha<Recorde> p, JTextArea listAux){        
